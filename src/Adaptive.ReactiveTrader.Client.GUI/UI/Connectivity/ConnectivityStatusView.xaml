@@ -1,0 +1,94 @@
+﻿<UserControl x:Class="Adaptive.ReactiveTrader.Client.UI.Connectivity.ConnectivityStatusView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Adaptive.ReactiveTrader.Client.GUI;component/Styles/Brushes.xaml" />
+                <ResourceDictionary Source="/Adaptive.ReactiveTrader.Client.GUI;component/Styles/Button.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="Margin" Value="10,3" />
+                
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Disconnected}" Value="True">
+                        <Setter Property="Foreground" Value="White" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style TargetType="Grid" x:Key="GridStyle">
+                <Setter Property="Background" Value="#FFDEE3E8" />
+
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Disconnected}" Value="True">
+                        <Setter Property="Background" Value="{StaticResource ErrorBackgroundBrush}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Style="{StaticResource GridStyle}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock ToolTipService.ShowDuration="40000">
+            <Run Text="{Binding Status, Mode=OneWay}"  />
+            <Run Text=" | "/>
+            <Run Text="ConnType:" />
+            <Run Text="{Binding TransportName, Mode=OneWay}"  />
+            <Run Text=" | "/>
+            <Run Text="E2E Lat.:" />
+            <Run Text="{Binding TotalLatency, Mode=OneWay}"  />
+            <Run Text=" | "/>
+            <Run Text="UI Upd.:" />
+            <Run Text="{Binding UiUpdates, Mode=OneWay}" />
+            <Run Text="/sec" />
+            <Run Text=" | "/>
+            <Run Text="Server Upd.:" />
+            <Run Text="{Binding TicksReceived, Mode=OneWay}" />
+            <Run Text="/sec" />
+            <Run Text=" | "/>
+            <Run Text="CPU:" />
+            <Run Text="{Binding CpuPercent, Mode=OneWay}"/>
+            <Run Text="%"/>
+            <Run Text=" | "/>
+            <Run Text="UI Lat.:" />
+            <Run Text="{Binding UiLatency, Mode=OneWay}"  />
+            <Run Text="ms"/>
+            <TextBlock.ToolTip>
+                <ToolTip Width="600">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock TextWrapping="Wrap">Metrics: We collect a number of different metrics and show them here every second. Each statistic is the value seen in the last second.</TextBlock>
+                        <TextBlock TextWrapping="Wrap">E2E Lat.: Shows the latency of the slowest tick to get from the server to being rendered on the UI.</TextBlock>
+                        <TextBlock TextWrapping="Wrap">UI Upd.: Shows the number of price updates we have rendered on the UI.</TextBlock>
+                        <TextBlock TextWrapping="Wrap">Server Upd.: Shows the number of price updates the UI has received from the server.</TextBlock>
+                        <TextBlock TextWrapping="Wrap">CPU: Shows the CPU usage of the UI (approximately).</TextBlock>
+                        <TextBlock TextWrapping="Wrap">UI Lat.: Shows the latency of the slowest price from when it was received by the UI to when it has been rendered.</TextBlock>
+                        <TextBlock TextWrapping="Wrap">ConnType: Shows the SignalR transport name initiated by the Client (webSockets, longPolling, etc).</TextBlock>
+                        <TextBlock TextWrapping="Wrap"><Run>Server:</Run> <Run Text="{Binding Server}"/> </TextBlock>
+                        <!--<TextBlock TextWrapping="Wrap">Histogram: Shows a more detailed breakdown of the latency distribution of rendered prices.</TextBlock>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding Histogram}"/>-->
+                    </StackPanel>
+                </ToolTip>
+            </TextBlock.ToolTip>
+        </TextBlock>
+        
+        <StackPanel Orientation="Horizontal" Grid.Column="1">
+            <TextBlock>           
+                <Hyperlink NavigateUri="http://www.weareadaptive.com" RequestNavigate="Hyperlink_OnRequestNavigate" TextDecorations="None">
+                    <Image Source="..\..\Styles\statusbar_logo.png" Stretch="None" />
+                </Hyperlink>
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProjectGuid>{D9CC4E4B-1E84-4FC4-A532-6D0A1C8E0D77}</ProjectGuid>
+    <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Adaptive.ReactiveTrader.Client.iOSTab</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>AdaptiveReactiveTraderClientiOSTab</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG;__MOBILE__;__IOS__;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchLink>None</MtouchLink>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchI18n>
+    </MtouchI18n>
+    <MtouchArch>ARMv7</MtouchArch>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <DefineConstants>__MOBILE__;__IOS__;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchLink>None</MtouchLink>
+    <ConsolePause>false</ConsolePause>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG;__MOBILE__;__IOS__;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchDebug>true</MtouchDebug>
+    <CodesignKey>iPhone Distribution: Adaptive Financial Consulting Limited (EANV3YMW5P)</CodesignKey>
+    <IpaPackageName>
+    </IpaPackageName>
+    <MtouchI18n>
+    </MtouchI18n>
+    <MtouchArch>ARMv7</MtouchArch>
+    <CodesignProvision>151C6120-E3E5-4B8F-9415-47B493964A1C</CodesignProvision>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <DefineConstants>__MOBILE__;__IOS__;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <ConsolePause>false</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchI18n>
+    </MtouchI18n>
+    <MtouchArch>ARMv7</MtouchArch>
+    <IpaPackageName>
+    </IpaPackageName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Ad-Hoc</OutputPath>
+    <DefineConstants>__MOBILE__;__IOS__;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <BuildIpa>true</BuildIpa>
+    <CodesignProvision>Automatic:AdHoc</CodesignProvision>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\AppStore</OutputPath>
+    <DefineConstants>__MOBILE__;__IOS__;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignProvision>151C6120-E3E5-4B8F-9415-47B493964A1C</CodesignProvision>
+    <CodesignKey>iPhone Distribution: Adaptive Financial Consulting Limited (EANV3YMW5P)</CodesignKey>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="monotouch" />
+    <Reference Include="MonoTouch.Dialog-1" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.2\lib\portable-net40+sl5+wp80+win8+monotouch+monoandroid\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Core">
+      <HintPath>..\packages\Rx-Core.2.2.2\lib\portable-windows8+net45+wp8\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\packages\Rx-Interfaces.2.2.2\lib\portable-windows8+net45+wp8\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>..\packages\Rx-Linq.2.2.2\lib\portable-windows8+net45+wp8\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices">
+      <HintPath>..\packages\Rx-PlatformServices.2.2.2\lib\portable-windows8+net45+wp8\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+    <None Include="Entitlements.plist" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="ConcurrencyService.cs" />
+    <Compile Include="iOSDispatcherScheduler.cs" />
+    <Compile Include="Logging\LoggerFactory.cs" />
+    <Compile Include="Logging\Log.cs" />
+    <Compile Include="Logging\ILogSink.cs" />
+    <Compile Include="Logging\ILogSource.cs" />
+    <Compile Include="Logging\LogHub.cs" />
+    <Compile Include="PriceTileModel.cs" />
+    <Compile Include="PriceTilesModel.cs" />
+    <Compile Include="PriceFormatter.cs" />
+    <Compile Include="FormattedPrice.cs" />
+    <Compile Include="NotifyingModel.cs" />
+    <Compile Include="INotifyChanged.cs" />
+    <Compile Include="View\Tiles\PriceTileStatus.cs" />
+    <Compile Include="View\Tiles\PriceTileTradeAffirmationViewCell.cs" />
+    <Compile Include="View\Tiles\PriceTileTradeAffirmationViewCell.designer.cs">
+      <DependentUpon>PriceTileTradeAffirmationViewCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Tiles\IPriceTileCell.cs" />
+    <Compile Include="Model\TradeDoneModel.cs" />
+    <Compile Include="Model\TradeTilesModel.cs" />
+    <Compile Include="View\Tiles\ITradeDoneCell.cs" />
+    <Compile Include="View\Tiles\INotionalDelegateRecipient.cs" />
+    <Compile Include="View\Tiles\PriceTileErrorViewCell.cs" />
+    <Compile Include="View\Tiles\PriceTileErrorViewCell.designer.cs">
+      <DependentUpon>PriceTileErrorViewCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Prices\PriceTilesViewController.cs" />
+    <Compile Include="View\Prices\PriceTilesViewSource.cs" />
+    <Compile Include="View\Tiles\PriceTileViewCell.cs" />
+    <Compile Include="View\Tiles\PriceTileViewCell.designer.cs">
+      <DependentUpon>PriceTileViewCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Trades\TradesViewController.cs" />
+    <Compile Include="View\Trades\TradesViewSource.cs" />
+    <Compile Include="Styles.cs" />
+    <Compile Include="View\Prices\PricesHeaderCell.cs" />
+    <Compile Include="View\Prices\PricesHeaderCell.designer.cs">
+      <DependentUpon>PricesHeaderCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Status\StatusViewController.cs" />
+    <Compile Include="View\Status\StatusViewController.designer.cs">
+      <DependentUpon>StatusViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\StartUp\StartUpView.cs" />
+    <Compile Include="View\StartUp\StartUpView.designer.cs">
+      <DependentUpon>StartUpView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Log\LogViewController.cs" />
+    <Compile Include="View\Log\LogViewController.designer.cs">
+      <DependentUpon>LogViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Tiles\NotionalTextFieldDelegate.cs" />
+    <Compile Include="Model\UserModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Icon-60%402x.png" />
+    <BundleResource Include="Resources\Icon%402x.png" />
+    <BundleResource Include="Resources\Icon.png" />
+    <BundleResource Include="Resources\Default-568h%402x.png" />
+    <BundleResource Include="Resources\Default%402x.png" />
+    <BundleResource Include="Resources\Default.png" />
+    <BundleResource Include="Resources\adaptive.png" />
+    <BundleResource Include="Resources\adaptive%402x.png" />
+    <BundleResource Include="Resources\green-up.png" />
+    <BundleResource Include="Resources\red-down.png" />
+    <BundleResource Include="Resources\adaptive-logo%402x.png" />
+    <BundleResource Include="Resources\adaptive-logo.png" />
+    <BundleResource Include="Resources\tab_status%402x.png" />
+    <BundleResource Include="Resources\tab_status.png" />
+    <BundleResource Include="Resources\tab_prices.png" />
+    <BundleResource Include="Resources\tab_prices%402x.png" />
+    <BundleResource Include="Resources\tab_trades.png" />
+    <BundleResource Include="Resources\tab_trades%402x.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\LaunchImage.launchimage\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\LaunchImage.launchimage\Default-568h%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Adaptive.ReactiveTrader.Client.Domain\Adaptive.ReactiveTrader.Client.Domain.Xamarin.csproj">
+      <Project>{B6C8FD41-866D-4992-BB11-AD6984C25564}</Project>
+      <Name>Adaptive.ReactiveTrader.Client.Domain.Xamarin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Adaptive.ReactiveTrader.Client\Adaptive.ReactiveTrader.Client.Xamarin.csproj">
+      <Project>{A894C01A-D326-40DF-BABC-0F807EB63A21}</Project>
+      <Name>Adaptive.ReactiveTrader.Client.Xamarin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Adaptive.ReactiveTrader.Shared\Adaptive.ReactiveTrader.Shared.Xamarin.csproj">
+      <Project>{B954B5A9-ABD0-469B-9397-039675BEC8F0}</Project>
+      <Name>Adaptive.ReactiveTrader.Shared.Xamarin</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Logging\" />
+    <Folder Include="View\" />
+    <Folder Include="View\Tiles\" />
+    <Folder Include="Model\" />
+    <Folder Include="View\Prices\" />
+    <Folder Include="View\Trades\" />
+    <Folder Include="View\Status\" />
+    <Folder Include="View\StartUp\" />
+    <Folder Include="View\Log\" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="View\Tiles\PriceTileTradeAffirmationViewCell.xib" />
+    <InterfaceDefinition Include="View\Tiles\PriceTileErrorViewCell.xib" />
+    <InterfaceDefinition Include="View\Tiles\PriceTileViewCell.xib" />
+    <InterfaceDefinition Include="View\Prices\PricesHeaderCell.xib" />
+    <InterfaceDefinition Include="View\Status\StatusViewController.xib" />
+    <InterfaceDefinition Include="View\StartUp\StartUpView.xib" />
+  </ItemGroup>
+</Project>

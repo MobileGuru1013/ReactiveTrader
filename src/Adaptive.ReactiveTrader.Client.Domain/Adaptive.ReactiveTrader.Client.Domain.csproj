@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B6C8FD41-866D-4992-BB11-AD6984C25564}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Adaptive.ReactiveTrader.Client.Domain</RootNamespace>
+    <AssemblyName>Adaptive.ReactiveTrader.Client.DomainPortable</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <NuGetPackageImportStamp>348a0b8f</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+    <None Include="app.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="readme.md" />
+    <None Include="ServiceClients\readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Authorization\AuthTokenProvider.cs" />
+    <Compile Include="Concurrency\ConcurrencyService.cs" />
+    <Compile Include="Concurrency\IConcurrencyService.cs" />
+    <Compile Include="ConnectionInfo.cs" />
+    <Compile Include="Instrumentation\Histogram.cs" />
+    <Compile Include="Instrumentation\IPriceLatencyRecorder.cs" />
+    <Compile Include="Instrumentation\IProcessorMonitor.cs" />
+    <Compile Include="Instrumentation\NullProcessorMonitor.cs" />
+    <Compile Include="Instrumentation\PriceLatencyRecorder.cs" />
+    <Compile Include="Instrumentation\Statistics.cs" />
+    <Compile Include="IReactiveTrader.cs" />
+    <Compile Include="Models\Direction.cs" />
+    <Compile Include="Models\Execution\ITrade.cs" />
+    <Compile Include="Models\Execution\ITradeFactory.cs" />
+    <Compile Include="Models\Execution\Trade.cs" />
+    <Compile Include="Models\Execution\TradeFactory.cs" />
+    <Compile Include="Models\Execution\TradeStatus.cs" />
+    <Compile Include="Models\Pricing\ExecutablePrice.cs" />
+    <Compile Include="Models\Pricing\IExecutablePrice.cs" />
+    <Compile Include="Models\Pricing\IPrice.cs" />
+    <Compile Include="Models\Pricing\IPriceFactory.cs" />
+    <Compile Include="Models\Pricing\IPriceLatency.cs" />
+    <Compile Include="Models\Pricing\Price.cs" />
+    <Compile Include="Models\Pricing\PriceFactory.cs" />
+    <Compile Include="Models\Pricing\StalePrice.cs" />
+    <Compile Include="Models\ReferenceData\CurrencyPair.cs" />
+    <Compile Include="Models\ReferenceData\CurrencyPairUpdate.cs" />
+    <Compile Include="Models\ReferenceData\CurrencyPairUpdateFactory.cs" />
+    <Compile Include="Models\ReferenceData\ICurrencyPair.cs" />
+    <Compile Include="Models\ReferenceData\ICurrencyPairUpdate.cs" />
+    <Compile Include="Models\ReferenceData\ICurrencyPairUpdateFactory.cs" />
+    <Compile Include="Models\UpdateType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReactiveTrader.cs" />
+    <Compile Include="Repositories\ControlRepository.cs" />
+    <Compile Include="Repositories\ExecutionRepository.cs" />
+    <Compile Include="Repositories\IControlRepository.cs" />
+    <Compile Include="Repositories\IExecutionRepository.cs" />
+    <Compile Include="Repositories\IPriceRepository.cs" />
+    <Compile Include="Repositories\IReferenceDataRepository.cs" />
+    <Compile Include="Repositories\ITradeRepository.cs" />
+    <Compile Include="Repositories\PriceRepository.cs" />
+    <Compile Include="Repositories\ReferenceDataRepository.cs" />
+    <Compile Include="Repositories\TradeRepository.cs" />
+    <Compile Include="ServiceClients\BlotterServiceClient.cs" />
+    <Compile Include="ServiceClients\ControlServiceClient.cs" />
+    <Compile Include="ServiceClients\ExecutionServiceClient.cs" />
+    <Compile Include="ServiceClients\IBlotterServiceClient.cs" />
+    <Compile Include="ServiceClients\IControlServiceClient.cs" />
+    <Compile Include="ServiceClients\IExecutionServiceClient.cs" />
+    <Compile Include="ServiceClients\IPricingServiceClient.cs" />
+    <Compile Include="ServiceClients\IReferenceDataServiceClient.cs" />
+    <Compile Include="ServiceClients\PricingServiceClient.cs" />
+    <Compile Include="ServiceClients\ReferenceDataServiceClient.cs" />
+    <Compile Include="ServiceClients\ServiceClientBase.cs" />
+    <Compile Include="Transport\Connection.cs" />
+    <Compile Include="Transport\ConnectionProvider.cs" />
+    <Compile Include="Transport\ConnectionStatus.cs" />
+    <Compile Include="Transport\IConnection.cs" />
+    <Compile Include="Transport\IConnectionProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNet.SignalR.Client">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Client.2.0.3\lib\portable-net45+sl5+netcore45+wp8\Microsoft.AspNet.SignalR.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.2\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net45+win8\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net45+win8\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Core">
+      <HintPath>..\packages\Rx-Core.2.2.5\lib\portable-windows8+net45+wp8\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\portable-windows8+net45+wp8\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>..\packages\Rx-Linq.2.2.5\lib\portable-windows8+net45+wp8\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices">
+      <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\portable-windows8+net45+wp8\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Adaptive.ReactiveTrader.Shared\Adaptive.ReactiveTrader.Shared.csproj">
+      <Project>{b954b5a9-abd0-469b-9397-039675bec8f0}</Project>
+      <Name>Adaptive.ReactiveTrader.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

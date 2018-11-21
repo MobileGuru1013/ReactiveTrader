@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="RunTests" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <RepoRoot>$(MSBuildProjectDirectory)\</RepoRoot>
+    <SourceRoot>$(MSBuildProjectDirectory)\src\</SourceRoot>
+    <Tools>$(RepoRoot)tools\</Tools>
+    <MSBuildCommunityTasksPath>$(Tools)</MSBuildCommunityTasksPath>
+    <Artifacts>$(RepoRoot)artifacts\</Artifacts>
+    <Mage>$(Tools)mage.exe</Mage>
+
+    <BuildConfiguration Condition="'$(BuildConfiguration)' == ''">Release</BuildConfiguration>
+
+    <BUILD_NUMBER Condition="'$(BUILD_NUMBER)' == ''">0.0.0.6</BUILD_NUMBER>
+    <Version>$(BUILD_NUMBER)</Version>
+    <FileVersion>$(BUILD_NUMBER)</FileVersion>
+    <InformationalVersion>$(BUILD_NUMBER)</InformationalVersion>
+
+    <ClientClickOnceFolder>$(Artifacts)ClickOnceClient\</ClientClickOnceFolder>
+    <ServerClickOnceFolder>$(Artifacts)ClickOnceServer\</ServerClickOnceFolder>
+    <ClientClickOnceFiles>$(ClientClickOnceFolder)$(Version)\</ClientClickOnceFiles>
+    <ServerClickOnceFiles>$(ServerClickOnceFolder)$(Version)\</ServerClickOnceFiles>
+    <ClientBlobTargetUrl>https://reactivetrader.blob.core.windows.net/client/</ClientBlobTargetUrl>
+    <ServerBlobTargetUrl>https://reactivetrader.blob.core.windows.net/server/</ServerBlobTargetUrl>
+    <ClientApplicationManifest>Adaptive.ReactiveTrader.application</ClientApplicationManifest>
+    <ServerApplicationManifest>Adaptive.ReactiveTrader.Server.application</ServerApplicationManifest>
+    <ClientProviderUrl>$(ClientBlobTargetUrl)$(ClientApplicationManifest)</ClientProviderUrl>
+    <ServerProviderUrl>$(ServerBlobTargetUrl)$(ServerApplicationManifest)</ServerProviderUrl>
+    <ClientProviderUrlArg>-ProviderURL $(ClientProviderUrl)</ClientProviderUrlArg>
+    <ServerProviderUrlArg>-ProviderURL $(ServerProviderUrl)</ServerProviderUrlArg>
+    <ClientClickOnceName Condition="$(ClientClickOnceName)==''">Reactive Trader</ClientClickOnceName>
+    <ServerClickOnceName Condition="$(ServerClickOnceName)==''">Reactive Trader Server</ServerClickOnceName>
+  </PropertyGroup>
+
+  <Import Project="$(Tools)\MSBuild.Community.Tasks.targets"/>
+
+  <Target Name="CleanBuildDir">
+    <ItemGroup>
+      <CleanProjects Include="$(SourceRoot)**\*.*proj" />
+      <OldDirectories Include="@(CleanProjects->'%(RootDir)%(Directory)bin')" />
+      <OldDirectories Include="@(CleanProjects->'%(RootDir)%(Directory)obj')" />
+    </ItemGroup>
+
+    <Delete Files="@(OldArtifacts)" ContinueOnError="true" />
+    <RemoveDir Directories="$(Artifacts)" ContinueOnError="true" />
+    <RemoveDir Directories="@(OldDirectories)" ContinueOnError="true" />
+  </Target>
+
+  <Target Name="Version" DependsOnTargets="CleanBuildDir">
+    <Time>
+      <Output TaskParameter="Year" PropertyName="Year" />
+    </Time>
+
+    <Message Text="Version: $(Version)"/>
+
+    <Attrib Files="$(SourceRoot)GlobalAssemblyInfo.cs" ReadOnly="False" />
+
+    <AssemblyInfo CodeLanguage="CS"
+                  OutputFile="$(SourceRoot)GlobalAssemblyInfo.cs"
+                  GenerateClass="false"
+                  AssemblyCopyright="Copyright © Adaptive $(Year). All rights reserved."
+                  AssemblyConfiguration="$(BuildConfiguration)"
+                  AssemblyVersion="$(Version)"
+                  AssemblyFileVersion="$(FileVersion)"
+                  AssemblyInformationalVersion="$(InformationalVersion)" />
+  </Target>
+
+  <!-- Projects to Build -->
+  <ItemGroup>
+    <ProjectFiles Include="$(SourceRoot)ReactiveTrader.sln">
+      <Properties>Configuration=$(BuildConfiguration)</Properties>
+    </ProjectFiles>
+  </ItemGroup>
+
+  <Target Name="Compile" DependsOnTargets="Version">
+    <MSBuild Projects="@(ProjectFiles)" />
+  </Target>
+
+  <ItemGroup>
+    <TestProjects Include="$(SourceRoot)Adaptive.ReactiveTrader.Tests\bin\$(BuildConfiguration)\Adaptive.ReactiveTrader.Tests.dll" />
+  </ItemGroup>
+
+  <UsingTask TaskName="NUnitTeamCity" AssemblyFile="$(teamcity_dotnet_nunitlauncher_msbuild_task)" Condition=" $(teamcity_dotnet_nunitlauncher_msbuild_task) != '' "/>
+
+  <Target Name="RunTests" DependsOnTargets="Compile">
+    
+    <!--If not using TeamCity, use MSBuild Community Tasks NUnit -->
+    <NUnit Assemblies="@(TestProjects)" Force32Bit="True"
+           ToolPath="$(SourceRoot)packages\NUnit.Runners.2.6.3\tools"
+           OutputXmlFile="$(NUnitResultsFile)"
+           Condition="$(teamcity_dotnet_nunitlauncher_msbuild_task) == ''"
+    />
+    
+    <!--If using TeamCity, use their NUnit task, which has different command-line settings -->
+    <NUnitTeamCity Assemblies="@(TestProjects)" 
+                   Platform="x86" 
+                   NUnitVersion="NUnit-2.6.3"
+                   Condition="$(teamcity_dotnet_nunitlauncher_msbuild_task) != ''"/>
+  </Target>
+
+  <Target Name="Package" DependsOnTargets="RunTests">
+    <ItemGroup>
+      <ClientFiles Include="$(SourceRoot)Adaptive.ReactiveTrader.Client.GUI\bin\$(BuildConfiguration)\**\*.*" />
+      <ServerFiles Include="$(SourceRoot)Adaptive.ReactiveTrader.Server.GUI\bin\$(BuildConfiguration)\**\*.*" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(ClientFiles)" DestinationFolder="$(ClientClickOnceFiles)%(ClientFiles.RecursiveDir)"/>
+    <Copy SourceFiles="@(ServerFiles)" DestinationFolder="$(ServerClickOnceFiles)%(ServerFiles.RecursiveDir)"/>
+
+    <Exec Command="$(Mage) -New Application -ToFile $(ClientClickOnceFiles)Adaptive.ReactiveTrader.Client.GUI.exe.manifest -Processor x86 -name &quot;$(ClientClickOnceName)&quot; -Version $(Version) -FromDirectory $(ClientClickOnceFiles) -IconFile icon.ico" />
+    <Exec Command="$(Mage) -New Application -ToFile $(ServerClickOnceFiles)Adaptive.ReactiveTrader.Server.GUI.exe.manifest -Processor x86 -name &quot;$(ServerClickOnceName)&quot; -Version $(Version) -FromDirectory $(ServerClickOnceFiles) -IconFile icon.ico" />
+
+    <Exec Command="$(Mage) -New Deployment -ToFile $(ClientClickOnceFolder)$(ClientApplicationManifest) -name &quot;$(ClientClickOnceName)&quot; -Processor x86 -Install true -Version $(Version) -Publisher &quot;Adaptive&quot; -AppManifest $(ClientClickOnceFiles)Adaptive.ReactiveTrader.Client.GUI.exe.manifest $(ClientProviderUrlArg)" />
+    <Exec Command="$(Mage) -New Deployment -ToFile $(ServerClickOnceFolder)$(ServerApplicationManifest) -name &quot;$(ServerClickOnceName)&quot; -Processor x86 -Install true -Version $(Version) -Publisher &quot;Adaptive&quot; -AppManifest $(ServerClickOnceFiles)Adaptive.ReactiveTrader.Server.GUI.exe.manifest $(ServerProviderUrlArg)" />
+
+    <Exec Command="powershell.exe -ExecutionPolicy RemoteSigned -NoProfile $(Tools)UpdateApplicationManifest.ps1 -ManifestFile $(ClientClickOnceFolder)$(ClientApplicationManifest)" />
+    <Exec Command="powershell.exe -ExecutionPolicy RemoteSigned -NoProfile $(Tools)UpdateApplicationManifest.ps1 -ManifestFile $(ServerClickOnceFolder)$(ServerApplicationManifest)" />
+
+    <ItemGroup>
+      <ClientDeploymentFiles Include="$(ClientClickOnceFiles)**\*.*" Exclude="$(ClientClickOnceFiles)Adaptive.ReactiveTrader.Client.GUI.exe.manifest" />
+      <ServerDeploymentFiles Include="$(ServerClickOnceFiles)**\*.*" Exclude="$(ServerClickOnceFiles)Adaptive.ReactiveTrader.Server.GUI.exe.manifest" />
+    </ItemGroup>
+
+    <Move SourceFiles="@(ClientDeploymentFiles)" DestinationFiles="@(ClientDeploymentFiles->'%(RootDir)%(Directory)%(FileName)%(Extension).deploy')" />
+    <Move SourceFiles="@(ServerDeploymentFiles)" DestinationFiles="@(ServerDeploymentFiles->'%(RootDir)%(Directory)%(FileName)%(Extension).deploy')" />
+
+  </Target>
+
+  <Target Name="Publish" DependsOnTargets="Package">
+    <!--$(BlobTargetUrl) = https://myaccount.blob.core.windows.net/mycontainer/ -->
+
+    <!--Upload everything except the application manifest as it should be done last (once everything else is uploaded)-->
+    <Move SourceFiles="$(ClientClickOnceFolder)$(ClientApplicationManifest)" DestinationFolder="$(ClientClickOnceFolder)ClickOnceApplicationFile\" />
+    <Exec Command="$(RepoRoot)tools\AzCopy.exe $(ClientClickOnceFolder) $(ClientBlobTargetUrl) /destkey:$(BlobTargetKey)== /S /V /Y" />
+    <Exec Command="$(RepoRoot)tools\AzCopy.exe $(ClientClickOnceFolder)ClickOnceApplicationFile\ $(ClientBlobTargetUrl) /destkey:$(BlobTargetKey)== /S /V /Y" />
+    
+    <Move SourceFiles="$(ServerClickOnceFolder)$(ServerApplicationManifest)" DestinationFolder="$(ServerClickOnceFolder)ClickOnceApplicationFile\" />
+    <Exec Command="$(RepoRoot)tools\AzCopy.exe $(ServerClickOnceFolder) $(ServerBlobTargetUrl) /destkey:$(BlobTargetKey)== /S /V /Y" />
+    <Exec Command="$(RepoRoot)tools\AzCopy.exe $(ServerClickOnceFolder)ClickOnceApplicationFile\ $(ServerBlobTargetUrl) /destkey:$(BlobTargetKey)== /S /V /Y" />
+  </Target>
+</Project>

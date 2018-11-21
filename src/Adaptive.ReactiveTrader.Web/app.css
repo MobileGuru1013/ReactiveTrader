@@ -1,0 +1,176 @@
+﻿body {
+    font-family: 'Segoe UI', sans-serif;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.primary-foreground {
+    color: #FFFFFF;
+}
+
+.secondary-foreground {
+    color: #90AFC1;
+}
+
+.one-way-price {
+    cursor: pointer;
+}
+
+.one-way-price table:hover {
+    background-color: #2F5078;
+}
+
+.normal-tile {
+    display: inline-block;
+    width: 328px;
+    height: 150px;
+    border: 0;
+    background-color: #293543;
+    margin: 1px;
+}
+
+
+#tile:hover {
+    background-color: #294464;
+}
+
+.error-tile {
+    display: inline-block;
+    width: 328px;
+    height: 150px;
+    border: 0;
+    background-color: #CE3C1C;
+    margin: 1px;
+}
+
+.tile a:link {
+    float: right;
+    text-decoration:none;
+    color: #90AFC1;
+}
+
+.tile a:visited {
+    float: right;
+    text-decoration:none;
+    color: #90AFC1;
+}
+
+.tile a:hover {
+    float: right;
+    text-decoration:underline;
+    color: #90AFC1;
+}
+
+.tile a:active {
+    float: right;
+    text-decoration:none;
+    color: #90AFC1;
+}
+
+.arrow-up {
+	width: 0; 
+	height: 0;
+    margin: auto;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-bottom: 8px solid #3FCF1E;
+}
+
+.arrow-down {
+	width: 0; 
+	height: 0;
+    margin: auto;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 8px solid #CC3350;
+}
+
+.error {
+    color: #FFFFFF;
+    background-color: #CE3C1C;
+}
+
+.tile-symbol {
+    font-size: 18px;
+    color: #FFFFFF;
+}
+
+.notional {
+    background-color: transparent;
+    color: #90AFC1;
+    border-style: none;
+}
+
+#tiles-area {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 260px;
+    background-color: #212A35;
+    overflow: auto;
+}
+
+#session-expired-area {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 260px;
+    background-color: #212A35;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
+
+#reconnect-link:link {
+    text-decoration:none;
+    color: #90AFC1;
+}
+
+#reconnect-link:visited {
+    text-decoration:none;
+    color: #90AFC1;
+}
+
+#reconnect-link:hover {
+    text-decoration:underline;
+    color: #90AFC1;
+}
+
+#reconnect-link:active {
+    text-decoration:none;
+    color: #90AFC1;
+}
+
+#blotter-area {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 30px;
+    height: 230px;
+}
+
+#status-bar-area {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 30px;
+    background-color: #DEE3E8;
+    white-space: nowrap;
+}

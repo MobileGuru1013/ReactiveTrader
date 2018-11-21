@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="Adaptive.ReactiveTrader.Client.UI.Blotter.BlotterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:designer="clr-namespace:Adaptive.ReactiveTrader.Client.UI.Blotter.Designer;assembly=Adaptive.ReactiveTrader.Client"
+             xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" 
+             d:DesignWidth="1200"
+             d:DataContext="{d:DesignInstance designer:DesignerModeBlotterViewModel, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+
+        <CollectionViewSource x:Key="DataGridViewSource" Source="{Binding Trades}">
+            <CollectionViewSource.SortDescriptions>
+                <componentModel:SortDescription PropertyName="TradeDate" Direction="Descending"/>
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+
+        <Style x:Key="RightAlignedHeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+            <Setter Property="HorizontalContentAlignment" Value="Right" />
+        </Style>
+
+        <Style x:Key="SemiBoldCellStyle" TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource DataGridCellStyle}">
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+
+        <Style x:Key="RightAlignedCellStyle" TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource DataGridCellStyle}">
+            <Setter Property="HorizontalContentAlignment" Value="Right" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+
+        <Style x:Key="StrikethroughRejectedStyle" TargetType="{x:Type TextBlock}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding TradeStatus}" Value="REJECTED">
+                    <Setter Property="TextDecorations" Value="Strikethrough"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="RedRejectedStyle" TargetType="{x:Type TextBlock}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding TradeStatus}" Value="REJECTED">
+                    <Setter Property="Foreground" Value="Red"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <DataGrid ItemsSource="{Binding Source={StaticResource DataGridViewSource}}" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn CanUserSort="True" SortMemberPath="TradeDate" Header="Date" Binding="{Binding TradeDate, StringFormat='dd MMM yy hh:mm'}" Width="140" ElementStyle="{StaticResource StrikethroughRejectedStyle}" />
+                <DataGridTextColumn CanUserSort="True" SortMemberPath="Direction" Header="Dir." Binding="{Binding Direction}" CellStyle="{StaticResource SemiBoldCellStyle}" Width="50" ElementStyle="{StaticResource StrikethroughRejectedStyle}" />
+                <DataGridTextColumn CanUserSort="True" SortMemberPath="CurrencyPair" Header="CCY" Binding="{Binding CurrencyPair}" CellStyle="{StaticResource SemiBoldCellStyle}"  Width="130" ElementStyle="{StaticResource StrikethroughRejectedStyle}" />
+                <DataGridTextColumn CanUserSort="True" SortMemberPath="Notional" Header="Notional" Binding="{Binding Notional}" HeaderStyle="{StaticResource RightAlignedHeaderStyle}" CellStyle="{StaticResource RightAlignedCellStyle}" Width="130" ElementStyle="{StaticResource StrikethroughRejectedStyle}" />
+                <DataGridTextColumn CanUserSort="True" SortMemberPath="SpotRate" Header="Rate" Binding="{Binding SpotRate}" HeaderStyle="{StaticResource RightAlignedHeaderStyle}" CellStyle="{StaticResource RightAlignedCellStyle}"  Width="100" ElementStyle="{StaticResource StrikethroughRejectedStyle}" />
+                <DataGridTextColumn CanUserSort="True" SortMemberPath="TradeStatus" Header="Status" Binding="{Binding TradeStatus}" Width="100" ElementStyle="{StaticResource RedRejectedStyle}" />
+                <DataGridTextColumn CanUserSort="True" SortMemberPath="ValueDate" Header="Value Date" Binding="{Binding ValueDate, StringFormat='dd MMM yy'}" Width="120" ElementStyle="{StaticResource StrikethroughRejectedStyle}" />
+                <DataGridTextColumn CanUserSort="True" SortMemberPath="TraderName" Header="Trader" Binding="{Binding TraderName}" Width="100" ElementStyle="{StaticResource StrikethroughRejectedStyle}" />
+                <DataGridTextColumn CanUserSort="True" SortMemberPath="TradeId" Header="Trade #" Binding="{Binding TradeId}" Width="*" ElementStyle="{StaticResource StrikethroughRejectedStyle}" />
+            </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource DataGridRowStyle}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsNewTrade}" Value="True" d:DataContext="{d:DesignInstance designer:DesignerModeTradeViewModel}">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard FillBehavior="Stop">
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="0:0:0.75" Value="#FF7A9EFF">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <PowerEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                            <EasingColorKeyFrame KeyTime="0:0:1.2" Value="Transparent"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
+    </Grid>
+</UserControl>

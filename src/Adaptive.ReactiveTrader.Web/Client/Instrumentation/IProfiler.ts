@@ -1,0 +1,3 @@
+﻿interface IProfiler {
+    now(): number;
+} 

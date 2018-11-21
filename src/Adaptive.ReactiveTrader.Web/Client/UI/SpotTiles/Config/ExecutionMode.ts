@@ -1,0 +1,5 @@
+﻿enum ExecutionMode
+{
+    Async,
+    Sync
+} 

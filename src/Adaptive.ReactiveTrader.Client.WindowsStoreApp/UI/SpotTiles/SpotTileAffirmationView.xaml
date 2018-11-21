@@ -1,0 +1,69 @@
+﻿<UserControl
+    x:Class="Adaptive.ReactiveTrader.Client.UI.SpotTiles.SpotTileAffirmationView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:designer="using:Adaptive.ReactiveTrader.Client.UI.SpotTiles.Designer"
+    xmlns:converters="using:Adaptive.ReactiveTrader.Client.Converters"
+    mc:Ignorable="d"     
+    d:DesignHeight="150"
+    d:DesignWidth="328"
+    d:DataContext="{d:DesignInstance designer:DesignTimeSpotTileAffirmationViewModel, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/Brushes.xaml" />
+                <ResourceDictionary Source="/Styles/Button.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="TextBlock" BasedOn="{StaticResource ReactiveTraderBaseTextBlockStyle}">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="Margin" Value="0,0,3,0" />
+            </Style>
+
+            <converters:ToStringConverter x:Key="ToStringConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Border Padding="15,12" Background="{StaticResource TileRootBackgroundBrush}">
+        <Grid>
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{Binding CurrencyPair}" Foreground="{StaticResource PrimaryForeground}" FontSize="18" />
+                    <TextBlock Grid.Column="1" TextAlignment="Right" Text="{Binding Rejected}" Foreground="{StaticResource ErrorForeground}" FontSize="18" FontWeight="SemiBold" />
+                </Grid>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Sold " Foreground="{StaticResource SecondaryForeground}" />
+                    <TextBlock Text="{Binding DealtCurrency}" Foreground="{StaticResource PrimaryForeground}" />
+                    <TextBlock Text=" " Foreground="{StaticResource PrimaryForeground}" />
+                    <TextBlock Text="{Binding Notional, Converter={StaticResource ToStringConverter}, ConverterParameter='{}{0:#,0}'}" Foreground="{StaticResource PrimaryForeground}" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="vs " Foreground="{StaticResource SecondaryForeground}" />
+                    <TextBlock Text="{Binding OtherCurrency}" Foreground="{StaticResource PrimaryForeground}" />
+                    <TextBlock Text="at " Foreground="{StaticResource SecondaryForeground}" />
+                    <TextBlock Text="{Binding SpotRate}" Foreground="{StaticResource PrimaryForeground}" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Spot " Foreground="{StaticResource SecondaryForeground}" />
+                    <TextBlock Text="{Binding TradeDate, Converter={StaticResource ToStringConverter}, ConverterParameter='{}{0:d MMMM}'}" Foreground="{StaticResource PrimaryForeground}" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Trade ID " Foreground="{StaticResource SecondaryForeground}" />
+                    <TextBlock Text="{Binding TradeId}" Foreground="{StaticResource PrimaryForeground}" />
+                </StackPanel>
+            </StackPanel>
+
+            <Button Content="Done" Command="{Binding DismissCommand, Mode=OneWay}" Style="{StaticResource HyperlinkButtonStyle}" FontSize="16" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="Adaptive.ReactiveTrader.Client.UI.SpotTiles.SpotTileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:designer="clr-namespace:Adaptive.ReactiveTrader.Client.UI.SpotTiles.Designer;assembly=Adaptive.ReactiveTrader.Client"
+             xmlns:spotTiles1="clr-namespace:Adaptive.ReactiveTrader.Client.UI.SpotTiles"
+             xmlns:controls="clr-namespace:Adaptive.ReactiveTrader.Client.Controls"
+             mc:Ignorable="d" 
+             Height="150"
+             Width="328"
+             Margin="0,0,3,3"
+             d:DataContext="{d:DesignInstance designer:DesignTimeSpotTileViewModel, IsDesignTimeCreatable=True}">
+    <Grid>
+        <controls:LazyContentControl Content="{Binding Pricing}">
+            <controls:LazyContentControl.LazyContentTemplate>
+                <DataTemplate>
+                    <spotTiles1:SpotTilePricingView />
+                </DataTemplate>
+            </controls:LazyContentControl.LazyContentTemplate>
+        </controls:LazyContentControl>
+
+        <controls:LazyContentControl Content="{Binding Affirmation}">
+            <controls:LazyContentControl.LazyContentTemplate>
+                <DataTemplate>
+                    <spotTiles1:SpotTileAffirmationView />
+                </DataTemplate>
+            </controls:LazyContentControl.LazyContentTemplate>
+        </controls:LazyContentControl>
+
+        <controls:LazyContentControl Content="{Binding Error}">
+            <controls:LazyContentControl.LazyContentTemplate>
+                <DataTemplate>
+                    <spotTiles1:SpotTileErrorView />
+                </DataTemplate>
+            </controls:LazyContentControl.LazyContentTemplate>
+        </controls:LazyContentControl>
+
+        <controls:LazyContentControl Content="{Binding Config}">
+            <controls:LazyContentControl.LazyContentTemplate>
+                <DataTemplate>
+                    <spotTiles1:SpotTileConfigView />
+                </DataTemplate>
+            </controls:LazyContentControl.LazyContentTemplate>
+        </controls:LazyContentControl>
+    </Grid>
+</UserControl>

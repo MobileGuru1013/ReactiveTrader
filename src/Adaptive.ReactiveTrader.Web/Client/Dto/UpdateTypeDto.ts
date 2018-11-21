@@ -1,0 +1,4 @@
+﻿enum UpdateTypeDto {
+    Added,
+    Removed
+}

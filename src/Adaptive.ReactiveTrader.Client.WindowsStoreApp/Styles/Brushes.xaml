@@ -1,0 +1,24 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="PrimaryForegroundColor">#E5FFFFFF</Color>
+    <SolidColorBrush x:Key="PrimaryForeground" Color="{StaticResource PrimaryForegroundColor}" />
+
+    <Color x:Key="SecondaryForegroundColor">#F290AFC1</Color>
+    <SolidColorBrush x:Key="SecondaryForeground" Color="{StaticResource SecondaryForegroundColor}" />
+    
+    
+    <SolidColorBrush x:Key="ErrorForeground" Color="#E5D30808" />
+
+    <SolidColorBrush x:Key="ErrorBackgroundBrush" Color="#FFCE3C1C" />
+
+    <SolidColorBrush x:Key="PriceButtonMousePressedBrush" Color="#FF345C8B" />
+
+    <Color x:Key="PriceButtonMouseOverColor">#FF2F5078</Color>
+    <SolidColorBrush x:Key="PriceButtonMouseOverBrush" Color="{StaticResource PriceButtonMouseOverColor}" />
+
+    <Color x:Key="TileRootBackgroundColor">#FF293543</Color>
+    <SolidColorBrush x:Key="TileRootBackgroundBrush" Color="{StaticResource TileRootBackgroundColor}" />
+
+</ResourceDictionary>

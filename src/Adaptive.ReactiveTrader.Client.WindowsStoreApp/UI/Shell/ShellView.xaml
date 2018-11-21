@@ -1,0 +1,33 @@
+﻿<UserControl
+    x:Class="Adaptive.ReactiveTrader.Client.UI.Shell.ShellView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:spotTiles="using:Adaptive.ReactiveTrader.Client.UI.SpotTiles"
+    xmlns:connectivity="using:Adaptive.ReactiveTrader.Client.UI.Connectivity"
+    xmlns:blotter="using:Adaptive.ReactiveTrader.Client.UI.Blotter"
+    xmlns:controls="using:Adaptive.ReactiveTrader.Client.Controls"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="BackgroundBrush" Color="#FF212A35" />
+    </UserControl.Resources>
+    
+    <Grid Background="{StaticResource BackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <spotTiles:SpotTilesView Grid.Row="0" DataContext="{Binding SpotTiles}" />
+        
+        <controls:GridSplitter Grid.Row="1" Background="{StaticResource BackgroundBrush}" />
+        
+        <blotter:BlotterView Grid.Row="2" DataContext="{Binding Blotter}" />
+
+        <connectivity:ConnectivityStatusView Grid.Row="3" DataContext="{Binding ConnectivityStatus}" />
+
+    </Grid>
+</UserControl>

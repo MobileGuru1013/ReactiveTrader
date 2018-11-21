@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6420729B-9168-44CF-BD25-849FAB7C81E8}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Adaptive.ReactiveTrader.Web</RootNamespace>
+    <AssemblyName>Adaptive.ReactiveTrader.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+    <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>false</TypeScriptSourceMap>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.0.3\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.0.3\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Cors, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Cors.3.0.1\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app.css" />
+    <Content Include="default.aspx" />
+    <Content Include="favicon.ico" />
+    <Content Include="generated.js" />
+    <Content Include="packages.config" />
+    <Content Include="generated.js.map" />
+    <None Include="Properties\PublishProfiles\reactivetrader - Web Deploy.pubxml" />
+    <Content Include="statusbar_logo.png" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Adaptive.ReactiveTrader.Server.Domain\Adaptive.ReactiveTrader.Server.Domain.csproj">
+      <Project>{1348ACC4-D5B2-4328-9C80-7EC813E82CE4}</Project>
+      <Name>Adaptive.ReactiveTrader.Server.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Adaptive.ReactiveTrader.Shared\Adaptive.ReactiveTrader.Shared.csproj">
+      <Project>{918ED78D-1E46-4305-B9FC-FAD07B582AFF}</Project>
+      <Name>Adaptive.ReactiveTrader.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="Client\Dto\CurrencyPairDto.ts" />
+    <TypeScriptCompile Include="Client\Dto\CurrencyPairUpdateDto.ts" />
+    <TypeScriptCompile Include="Client\Dto\DirectionDto.ts" />
+    <TypeScriptCompile Include="Client\Dto\PriceDto.ts" />
+    <TypeScriptCompile Include="Client\Dto\PriceSubscriptionRequestDto.ts" />
+    <TypeScriptCompile Include="Client\Dto\TradeDto.ts" />
+    <TypeScriptCompile Include="Client\Dto\TradeRequestDto.ts" />
+    <TypeScriptCompile Include="Client\Dto\TradeStatusDto.ts" />
+    <TypeScriptCompile Include="Client\Dto\UpdateTypeDto.ts" />
+    <TypeScriptCompile Include="Client\Extensions\DateUtils.ts" />
+    <TypeScriptCompile Include="Client\Extensions\IStale.ts" />
+    <TypeScriptCompile Include="Client\Extensions\NumberFormatter.ts" />
+    <TypeScriptCompile Include="Client\Extensions\ObservableExtensions.ts" />
+    <TypeScriptCompile Include="Client\Extensions\Stale.ts" />
+    <TypeScriptCompile Include="Client\Instrumentation\IPriceLatencyRecorder.ts" />
+    <TypeScriptCompile Include="Client\Instrumentation\IProfiler.ts" />
+    <TypeScriptCompile Include="Client\Instrumentation\MaxLatency.ts" />
+    <TypeScriptCompile Include="Client\Instrumentation\PriceLatencyRecorder.ts" />
+    <TypeScriptCompile Include="Client\Instrumentation\Profiler.ts" />
+    <TypeScriptCompile Include="Client\Models\Direction.ts" />
+    <TypeScriptCompile Include="Client\Models\Execution\ITrade.ts" />
+    <TypeScriptCompile Include="Client\Models\Execution\ITradeFactory.ts" />
+    <TypeScriptCompile Include="Client\Models\Execution\Trade.ts" />
+    <TypeScriptCompile Include="Client\Models\Execution\TradeFactory.ts" />
+    <TypeScriptCompile Include="Client\Models\Execution\TradeStatus.ts" />
+    <TypeScriptCompile Include="Client\Models\Pricing\ExecutablePrice.ts" />
+    <TypeScriptCompile Include="Client\Models\Pricing\IExecutablePrice.ts" />
+    <TypeScriptCompile Include="Client\Models\Pricing\IPrice.ts" />
+    <TypeScriptCompile Include="Client\Models\Pricing\IPriceFactory.ts" />
+    <TypeScriptCompile Include="Client\Models\Pricing\IPriceLatency.ts" />
+    <TypeScriptCompile Include="Client\Models\Pricing\Price.ts" />
+    <TypeScriptCompile Include="Client\Models\Pricing\PriceFactory.ts" />
+    <TypeScriptCompile Include="Client\Models\Pricing\StalePrice.ts" />
+    <TypeScriptCompile Include="Client\Models\ReferenceData\CurrencyPair.ts" />
+    <TypeScriptCompile Include="Client\Models\ReferenceData\CurrencyPairUpdate.ts" />
+    <TypeScriptCompile Include="Client\Models\ReferenceData\CurrencyPairUpdateFactory.ts" />
+    <TypeScriptCompile Include="Client\Models\ReferenceData\ICurrencyPair.ts" />
+    <TypeScriptCompile Include="Client\Models\ReferenceData\ICurrencyPairUpdate.ts" />
+    <TypeScriptCompile Include="Client\Models\ReferenceData\ICurrencyPairUpdateFactory.ts" />
+    <TypeScriptCompile Include="Client\Models\UpdateType.ts" />
+    <TypeScriptCompile Include="Client\Repositories\ExecutionRepository.ts" />
+    <TypeScriptCompile Include="Client\Repositories\IExecutionRepository.ts" />
+    <TypeScriptCompile Include="Client\Repositories\IPriceRepository.ts" />
+    <TypeScriptCompile Include="Client\Repositories\IReferenceDataRepository.ts" />
+    <TypeScriptCompile Include="Client\Repositories\ITradeRepository.ts" />
+    <TypeScriptCompile Include="Client\Repositories\PriceRepository.ts" />
+    <TypeScriptCompile Include="Client\Repositories\ReferenceDataRepository.ts" />
+    <TypeScriptCompile Include="Client\Repositories\TradeRepository.ts" />
+    <TypeScriptCompile Include="Client\ServiceClients\ServiceClientBase.ts" />
+    <TypeScriptCompile Include="Client\ServiceClients\BlotterServiceClient.ts" />
+    <TypeScriptCompile Include="Client\ServiceClients\ExecutionServiceClient.ts" />
+    <TypeScriptCompile Include="Client\ServiceClients\IBlotterServiceClient.ts" />
+    <TypeScriptCompile Include="Client\ServiceClients\IExecutionServiceClient.ts" />
+    <TypeScriptCompile Include="Client\ServiceClients\IPricingServiceClient.ts" />
+    <TypeScriptCompile Include="Client\ServiceClients\IReferenceDataServiceClient.ts" />
+    <TypeScriptCompile Include="Client\ServiceClients\PricingServiceClient.ts" />
+    <TypeScriptCompile Include="Client\ServiceClients\ReferenceDataServiceClient.ts" />
+    <TypeScriptCompile Include="Client\ServiceClients\TransportDisconnectedException.ts" />
+    <TypeScriptCompile Include="Client\Session\ISessionExpirationService.ts" />
+    <TypeScriptCompile Include="Client\Session\SessionExpirationService.ts" />
+    <TypeScriptCompile Include="Client\Transport\Connection.ts" />
+    <TypeScriptCompile Include="Client\Transport\connectionInfo.ts" />
+    <TypeScriptCompile Include="Client\Transport\ConnectionProvider.ts" />
+    <TypeScriptCompile Include="Client\Transport\ConnectionStatus.ts" />
+    <TypeScriptCompile Include="Client\Transport\ConnectionType.ts" />
+    <TypeScriptCompile Include="Client\Transport\IConnection.ts" />
+    <TypeScriptCompile Include="Client\Transport\IConnectionProvider.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\rx.js\rx.aggregates.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\rx.js\rx.async.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\rx.js\rx.binding.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\rx.js\rx.coincidence.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\rx.js\rx.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\rx.js\rx.experimental.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\rx.js\rx.joinpatterns.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\rx.js\rx.jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\rx.js\rx.testing.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\rx.js\rx.time.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\rx.js\rx.virtualtime.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\signalr\signalr.d.ts" />
+    <TypeScriptCompile Include="Client\UI\Blotter\BlotterViewModel.ts" />
+    <TypeScriptCompile Include="Client\UI\Blotter\IBlotterViewModel.ts" />
+    <TypeScriptCompile Include="Client\UI\Blotter\ITradeViewModel.ts" />
+    <TypeScriptCompile Include="Client\UI\Blotter\TradeViewModel.ts" />
+    <TypeScriptCompile Include="Client\UI\Connectivity\ConnectivityStatusViewModel.ts" />
+    <TypeScriptCompile Include="Client\UI\Connectivity\IConnectivityStatusViewModel.ts" />
+    <TypeScriptCompile Include="Client\UI\Shell\IShellViewModel.ts" />
+    <TypeScriptCompile Include="Client\UI\Shell\ShellViewModel.ts" />
+    <TypeScriptCompile Include="Client\UI\SpotTiles\Affirmation\AffirmationViewModel.ts" />
+    <TypeScriptCompile Include="Client\UI\SpotTiles\Affirmation\IAffirmationViewModel.ts" />
+    <TypeScriptCompile Include="Client\UI\SpotTiles\Config\ConfigViewModel.ts" />
+    <TypeScriptCompile Include="Client\UI\SpotTiles\Config\ExecutionMode.ts" />
+    <TypeScriptCompile Include="Client\UI\SpotTiles\Config\IConfigViewModel.ts" />
+    <TypeScriptCompile Include="Client\UI\SpotTiles\Config\SubscriptionMode.ts" />
+    <TypeScriptCompile Include="Client\UI\SpotTiles\Error\ErrorViewModel.ts" />
+    <TypeScriptCompile Include="Client\UI\SpotTiles\Error\IErrorViewModel.ts" />
+    <TypeScriptCompile Include="Client\UI\SpotTiles\ISpotTilesViewModel.ts" />
+    <TypeScriptCompile Include="Client\UI\SpotTiles\ISpotTileViewModel.ts" />
+    <TypeScriptCompile Include="Client\UI\SpotTiles\Pricing\FormattedPrice.ts" />
+    <TypeScriptCompile Include="Client\UI\SpotTiles\Pricing\IOneWayPriceViewModel.ts" />
+    <TypeScriptCompile Include="Client\UI\SpotTiles\Pricing\IPricingViewModel.ts" />
+    <TypeScriptCompile Include="Client\UI\SpotTiles\Pricing\IPricingViewModelFactory.ts" />
+    <TypeScriptCompile Include="Client\UI\SpotTiles\Pricing\OneWayPriceViewModel.ts" />
+    <TypeScriptCompile Include="Client\UI\SpotTiles\Pricing\PriceFormatter.ts" />
+    <TypeScriptCompile Include="Client\UI\SpotTiles\Pricing\PriceMovement.ts" />
+    <TypeScriptCompile Include="Client\UI\SpotTiles\Pricing\PricingViewModel.ts" />
+    <TypeScriptCompile Include="Client\UI\SpotTiles\Pricing\PricingViewModelFactory.ts" />
+    <TypeScriptCompile Include="Client\UI\SpotTiles\SpotTilesViewModel.ts" />
+    <TypeScriptCompile Include="Client\UI\SpotTiles\SpotTileViewModel.ts" />
+    <TypeScriptCompile Include="Client\UI\SpotTiles\TileState.ts" />
+    <TypeScriptCompile Include="IReactiveTrader.ts" />
+    <TypeScriptCompile Include="ReactiveTrader.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery.color\jquery.color.d.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!--<Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />-->
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptOutFile>generated.js</TypeScriptOutFile>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49762</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:49762/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

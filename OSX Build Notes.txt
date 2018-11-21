@@ -1,0 +1,85 @@
+Steps
+
+1. Update Microsot.Portable.CShart.targets in /Library/Frameworks/Mono.framework/Versions/3.2.6/lib/mono/xbuild/Microsoft/Portable/v4.5
+ to:
+
+<!--Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Import Project="$(MSBuildExtensionsPath)\Microsoft.Portable.CSharp.Targets" />    
+</Project-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+        <PropertyGroup>
+                <AvailablePlatforms>Any CPU</AvailablePlatforms>
+
+                <TargetPlatformIdentifier>Portable</TargetPlatformIdentifier>
+                <TargetFrameworkIdentifier>.NETPortable</TargetFrameworkIdentifier>
+                <TargetFrameworkMonikerDisplayName>.NET Portable Subset</TargetFrameworkMonikerDisplayName>
+
+                <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
+                <NoStdLib>true</NoStdLib>
+
+                <ImplicitlyExpandTargetFramework Condition="'$(ImplicitlyExpandTargetFramework)' == '' ">true</ImplicitlyExpandTargetFramework> 
+        </PropertyGroup>
+
+        <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.Targets" />
+
+        <PropertyGroup>
+                <ResolveReferencesDependsOn>
+                        $(ResolveReferencesDependsOn);
+                        ImplicitlyExpandTargetFramework;
+                </ResolveReferencesDependsOn>
+
+                <ImplicitlyExpandTargetFrameworkDependsOn>
+                        $(ImplicitlyExpandTargetFrameworkDependsOn);
+                        GetReferenceAssemblyPaths
+                </ImplicitlyExpandTargetFrameworkDependsOn>
+        </PropertyGroup>
+
+        <Target Name="ImplicitlyExpandTargetFramework"
+                DependsOnTargets="$(ImplicitlyExpandTargetFrameworkDependsOn)">
+
+                <ItemGroup>
+                        <ReferenceAssemblyPaths Include="$(_TargetFrameworkDirectories)"/>
+                        <ReferencePath Include="%(ReferenceAssemblyPaths.Identity)\*.dll">
+                                <CopyLocal>false</CopyLocal>
+                                <ResolvedFrom>ImplicitlyExpandTargetFramework</ResolvedFrom>
+                                <IsSystemReference>True</IsSystemReference>
+                        </ReferencePath>
+                </ItemGroup>
+        </Target>
+</Project>
+
+2. Update .Shared.csproj to:
+
+	<Project ToolVersion="4.0" ... />
+
+3. Update .nuget/nuget.targets with:
+
+-        <PackagesProjectConfig>packages.$(MSBuildProjectName.Replace(' ', '_')).config</PackagesProjectConfig>
++       <PackagesProjectConfig Condition=" '$(OS)' == 'Windows_NT'">$(MSBuildProjectDirectory)\packages.$(MSBuildProjectName.Replace(' ', '_')).config</PackagesProjectConfig>
++       <PackagesProjectConfig Condition=" '$(OS)' != 'Windows_NT'">$(MSBuildProjectDirectory)\packages.$(MSBuildProjectName).config</PackagesProjectConfig>    
+	
+-    <Choose>
+-        <When Condition="Exists('$(PackagesProjectConfig)')">
+-            <PropertyGroup>
+-                <PackagesConfig>$(PackagesProjectConfig)</PackagesConfig>
+-            </PropertyGroup>
+-        </When>
+-        <When Condition="Exists('packages.config')">
+-            <PropertyGroup>
+-                <PackagesConfig>packages.config</PackagesConfig>
+-            </PropertyGroup>
+-        </When>
+-    </Choose>
++    <PropertyGroup>
++        <PackagesConfig Condition="Exists('$(PackagesProjectConfig)')">$(PackagesProjectConfig)</PackagesConfig>
++        <PackagesConfig Condition="Exists('$(MSBuildProjectDirectory)\packages.config')">$(MSBuildProjectDirectory)\packages.config</PackagesConfig>
++    </PropertyGroup>
+
+
+At this point you should have your .Shared project building.
+
+4. Repeat step 2. for every PCL project you want to build.
+
+5. Add all transitive dependecies to iOSTab project.
+	- NewtonJsoft for one.
+

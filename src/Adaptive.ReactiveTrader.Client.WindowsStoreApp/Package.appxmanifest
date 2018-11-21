@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
+  <Identity Name="AdaptiveFinancialConsulti.ReactiveTrader" Publisher="CN=B8FAEEF7-BF43-4BD1-B1FC-FF47152B771F" Version="1.1.0.0" />
+  <Properties>
+    <DisplayName>Reactive Trader</DisplayName>
+    <PublisherDisplayName>Adaptive Financial Consulting Limited</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+  <Prerequisites>
+    <OSMinVersion>6.3.0</OSMinVersion>
+    <OSMaxVersionTested>6.3.0</OSMaxVersionTested>
+  </Prerequisites>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Adaptive.ReactiveTrader.Client.WindowsStoreApp.App">
+      <m2:VisualElements DisplayName="Reactive Trader" Square150x150Logo="Assets\tile150x150.png" Square30x30Logo="Assets\SmallLogo.png" Description="Adaptive Reactive Trader" ForegroundText="light" BackgroundColor="#294464">
+        <m2:DefaultTile ShortName="Reactive Trader">
+          <m2:ShowNameOnTiles>
+            <m2:ShowOn Tile="square150x150Logo" />
+          </m2:ShowNameOnTiles>
+        </m2:DefaultTile>
+        <m2:SplashScreen Image="Assets\splash_logo.png" BackgroundColor="#FFFFFF" />
+      </m2:VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
+</Package>

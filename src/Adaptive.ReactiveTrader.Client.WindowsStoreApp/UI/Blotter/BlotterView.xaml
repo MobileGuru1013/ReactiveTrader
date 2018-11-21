@@ -1,0 +1,222 @@
+﻿<UserControl
+    x:Class="Adaptive.ReactiveTrader.Client.UI.Blotter.BlotterView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:designer="using:Adaptive.ReactiveTrader.Client.UI.Blotter.Designer"
+    xmlns:converters="using:Adaptive.ReactiveTrader.Client.Converters"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:behaviors="using:Adaptive.ReactiveTrader.Client.Behaviors"
+    mc:Ignorable="d"
+    d:DesignHeight="300" 
+    d:DesignWidth="1200"
+    d:DataContext="{d:DesignInstance designer:DesignerModeBlotterViewModel, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <converters:ToStringConverter x:Key="ToStringConverter" />
+    </UserControl.Resources>
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <Grid Height="42">
+                <Grid.Resources>
+                    <Style TargetType="TextBlock" BasedOn="{StaticResource ReactiveTraderBaseTextBlockStyle}">
+                        <Setter Property="Foreground" Value="#FF787878" />
+                        <Setter Property="FontWeight" Value="Bold" />
+                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="Margin" Value="10,0"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Date" />
+                <TextBlock Grid.Column="1" Text="Dir." />
+                <TextBlock Grid.Column="2" Text="CCY" />
+                <TextBlock Grid.Column="3" Text="Notional" HorizontalAlignment="Right" />
+                <TextBlock Grid.Column="4" Text="Rate" HorizontalAlignment="Right" />
+                <TextBlock Grid.Column="5" Text="Status" />
+                <TextBlock Grid.Column="6" Text="Value Date" />
+                <TextBlock Grid.Column="7"  Text="Trader" />
+                <TextBlock Grid.Column="8" Text="Trade #" />
+            </Grid>
+
+            <Border Height="1" Background="#FFE8E9EA" />
+        </StackPanel>
+
+        <ListBox Grid.Row="1" ItemsSource="{Binding Trades}">
+            <ListBox.Style>
+                <Style TargetType="ListBox">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Enabled" />
+                    <Setter Property="ScrollViewer.VerticalScrollMode" Value="Enabled" />
+                    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible" />
+                    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Visible" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBox">
+                                <Border x:Name="LayoutRoot" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                                    <ScrollViewer x:Name="ScrollViewer" AutomationProperties.AccessibilityView="Raw" BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" Padding="{TemplateBinding Padding}" TabNavigation="{TemplateBinding TabNavigation}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}">
+                                        <ItemsPresenter/>
+                                    </ScrollViewer>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.Style>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <i:Interaction.Behaviors>
+                            <core:DataTriggerBehavior Binding="{Binding TradeStatus}" Value="REJECTED">
+                                <core:ChangePropertyAction TargetObject="{Binding ElementName=TradeStatusTextBlock}" PropertyName="Foreground" Value="Red" />
+                            </core:DataTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                        <Grid.Resources>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource ReactiveTraderBaseTextBlockStyle}">
+                                <Setter Property="Margin" Value="10,0"/>
+                                <Setter Property="Foreground" Value="#FF151515"/>
+                                <Setter Property="FontSize" Value="14"/>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="130" />
+                            <ColumnDefinition Width="130" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="{Binding TradeDate, Converter={StaticResource ToStringConverter}, ConverterParameter='{}{0:dd MMM yy hh:mm}'}" />
+                        <TextBlock Grid.Column="1" Text="{Binding Direction}" FontWeight="SemiBold" />
+                        <TextBlock Grid.Column="2" Text="{Binding CurrencyPair}" FontWeight="SemiBold" />
+                        <TextBlock Grid.Column="3" Text="{Binding Notional}" FontWeight="SemiBold" HorizontalAlignment="Right" />
+                        <TextBlock Grid.Column="4" Text="{Binding SpotRate}" FontWeight="SemiBold" HorizontalAlignment="Right" />
+                        <TextBlock x:Name="TradeStatusTextBlock" Grid.Column="5" Text="{Binding TradeStatus}" />
+                        <TextBlock Grid.Column="6" Text="{Binding ValueDate, Converter={StaticResource ToStringConverter}, ConverterParameter='{}{0:dd MMM yy}'}" />
+                        <TextBlock Grid.Column="7"  Text="{Binding TraderName}" />
+                        <TextBlock Grid.Column="8" Text="{Binding TradeId}" />
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Padding" Value="0" />
+                    <Setter Property="Height" Value="30" />
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <Border x:Name="LayoutRoot" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                                    <Border.Resources>
+                                        <SolidColorBrush x:Key="SelectedRowBrush" Color="#FFFFFED7" />
+                                    </Border.Resources>
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal"/>
+                                            <VisualState x:Name="PointerOver" />
+                                            <VisualState x:Name="Disabled" />
+                                            <VisualState x:Name="Pressed" />
+                                        </VisualStateGroup>
+                                        <VisualStateGroup x:Name="SelectionStates">
+                                            <VisualState x:Name="Unselected"/>
+                                            <VisualState x:Name="Selected">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="InnerGrid">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SelectedRowBrush}"/>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="SelectedUnfocused">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="InnerGrid">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SelectedRowBrush}"/>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="SelectedDisabled">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="InnerGrid">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SelectedRowBrush}"/>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="SelectedPointerOver">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="InnerGrid">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SelectedRowBrush}"/>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="SelectedPressed">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="InnerGrid">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SelectedRowBrush}"/>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                        <VisualStateGroup x:Name="NewRowGroup">
+                                            <VisualState x:Name="ExistingRow"/>
+                                            <VisualState x:Name="NewRow">
+                                                <Storyboard FillBehavior="Stop">
+                                                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="InnerGrid">
+                                                        <EasingColorKeyFrame KeyTime="0:0:0.75" Value="#FF7A9EFF">
+                                                            <EasingColorKeyFrame.EasingFunction>
+                                                                <PowerEase EasingMode="EaseInOut"/>
+                                                            </EasingColorKeyFrame.EasingFunction>
+                                                        </EasingColorKeyFrame>
+                                                        <EasingColorKeyFrame KeyTime="0:0:1.2" Value="Transparent"/>
+                                                    </ColorAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                    <i:Interaction.Behaviors>
+                                        <behaviors:OnLoadedRefreshDataTriggersBehavior />
+                                        <core:DataTriggerBehavior Binding="{Binding IsNewTrade}" Value="True">
+                                            <core:GoToStateAction StateName="ExistingRow" />
+                                            <core:GoToStateAction StateName="NewRow" />
+                                        </core:DataTriggerBehavior>
+                                    </i:Interaction.Behaviors>
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid x:Name="InnerGrid" Background="Transparent">
+                                            <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                        </Grid>
+                                        <Rectangle Grid.Row="1" Stroke="#FFBCBFC2" Height="1" StrokeThickness="1" StrokeDashArray="1,2" />
+                                    </Grid>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+    </Grid>
+</UserControl>

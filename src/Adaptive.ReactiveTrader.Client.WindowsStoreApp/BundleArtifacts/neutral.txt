@@ -1,0 +1,4 @@
+MainPackage=C:\Users\matt\src\ReactiveTrader\src\Adaptive.ReactiveTrader.Client.WindowsStoreApp\bin\Release\Adaptive.ReactiveTrader.Client.WindowsStoreApp_1.1.0.0_Bundle\Adaptive.ReactiveTrader.Client.WindowsStoreApp_1.1.0.0_AnyCPU.appx
+SymbolPackage=C:\Users\matt\src\ReactiveTrader\src\Adaptive.ReactiveTrader.Client.WindowsStoreApp\AppPackages\Adaptive.ReactiveTrader.Client.WindowsStoreApp_1.1.0.0_Test\Adaptive.ReactiveTrader.Client.WindowsStoreApp_1.1.0.0_AnyCPU.appxsym
+ResourcePack=C:\Users\matt\src\ReactiveTrader\src\Adaptive.ReactiveTrader.Client.WindowsStoreApp\bin\Release\Adaptive.ReactiveTrader.Client.WindowsStoreApp_1.1.0.0_Bundle\Adaptive.ReactiveTrader.Client.WindowsStoreApp_1.1.0.0_scale-140.appx
+ResourcePack=C:\Users\matt\src\ReactiveTrader\src\Adaptive.ReactiveTrader.Client.WindowsStoreApp\bin\Release\Adaptive.ReactiveTrader.Client.WindowsStoreApp_1.1.0.0_Bundle\Adaptive.ReactiveTrader.Client.WindowsStoreApp_1.1.0.0_scale-180.appx

@@ -1,0 +1,47 @@
+﻿<UserControl
+    x:Class="Adaptive.ReactiveTrader.Client.UI.SpotTiles.SpotTilesView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:designer="using:Adaptive.ReactiveTrader.Client.UI.SpotTiles.Designer"
+    xmlns:spotTiles="using:Adaptive.ReactiveTrader.Client.UI.SpotTiles"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance designer:DesignTimeSpotTilesViewModel, IsDesignTimeCreatable=True}">
+
+    <ListView ItemsSource="{Binding SpotTiles}" Margin="7,7,0,0" 
+              SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="False">
+        <ListView.ItemsPanel>
+            <ItemsPanelTemplate>
+                <WrapGrid Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+        </ListView.ItemsPanel>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <spotTiles:SpotTileView />
+            </DataTemplate>
+        </ListView.ItemTemplate>
+        <ListView.ItemContainerStyle>
+            <Style TargetType="ListViewItem">
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListViewItem">
+                            <ListViewItemPresenter ContentMargin="0" 
+                                                   ContentTransitions="{TemplateBinding ContentTransitions}"
+                                                   DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" 
+                                                   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                   Padding="{TemplateBinding Padding}" 
+                                                   PointerOverBackgroundMargin="1" 
+                                                   PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"
+                                                   ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" 
+                                                   SelectionCheckMarkVisualEnabled="False"
+                                                   VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ListView.ItemContainerStyle>
+    </ListView>
+
+</UserControl>
